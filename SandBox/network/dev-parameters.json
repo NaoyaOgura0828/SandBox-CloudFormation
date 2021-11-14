@@ -1,0 +1,20 @@
+{
+    "Parameters": [
+        {
+            "ParameterKey": "SystemName",
+            "ParameterValue": "SandBox"
+        },
+        {
+            "ParameterKey": "EnvType",
+            "ParameterValue": "dev"
+        },
+        {
+            "ParameterKey": "VPCCidrBlock",
+            "ParameterValue": "100.0.0.0/16"
+        },
+        {
+            "ParameterKey": "PublicSubnetCidrBlock",
+            "ParameterValue": "100.0.1.0/24"
+        }
+    ]
+}

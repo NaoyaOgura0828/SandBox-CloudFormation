@@ -26,7 +26,7 @@ delete_stack () {
     --profile ${SYSTEM_NAME}-${ENV_TYPE}
 }
 
-# delete_stack sandbox
+# delete_stack ec2
 # delete_stack sg
 # delete_stack network
 # delete_stack iam

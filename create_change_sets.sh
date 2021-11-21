@@ -37,7 +37,7 @@ create_change_set () {
 # create_change_set iam
 # create_change_set network
 # create_change_set sg
-# create_change_set sandbox
+# create_change_set ec2
 
 
 exit 0

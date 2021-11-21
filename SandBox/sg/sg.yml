@@ -21,15 +21,15 @@ Mappings:
       3nd: ap-northeast-1d
 
 Resources:
-  # SecurityGroup for SandBox
-  SecurityGroupSandBox:
+  # SecurityGroup for EC2
+  SecurityGroupEC2:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: !Sub
-        - ${SystemName}-${EnvType}-sandbox-sg
+        - ${SystemName}-${EnvType}-ec2-sg
         - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}
       GroupName: !Sub
-        - ${SystemName}-${EnvType}-sandbox-sg
+        - ${SystemName}-${EnvType}-ec2-sg
         - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}
       SecurityGroupIngress:
         - Description: 'SSH'
@@ -49,7 +49,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub
-            - ${SystemName}-${EnvType}-sandbox-sg
+            - ${SystemName}-${EnvType}-ec2-sg
             - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}
         - Key: SystemName
           Value: !Ref SystemName
@@ -57,9 +57,9 @@ Resources:
           Value: !Ref EnvType
 
 Outputs:
-  SecurityGroupSandBox:
-    Value: !Ref SecurityGroupSandBox
+  SecurityGroupEC2:
+    Value: !Ref SecurityGroupEC2
     Export:
       Name: !Sub
-        - ${SystemName}-${EnvType}-sandbox-sg
+        - ${SystemName}-${EnvType}-ec2-sg
         - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}

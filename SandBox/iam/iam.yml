@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: IAM
+Description: IAM for SandBox
 
 Parameters:
   SystemName:
@@ -20,15 +20,15 @@ Mappings:
       3rd: ap-northeast-1d
 
 Resources:
-  # EC2 SandBox ロール作成
+  # EC2 ロール作成
   RoleSandBox:
     Type: AWS::IAM::Role
     Properties:
       RoleName: !Sub
-        - ${SystemName}-${EnvType}-role-sandbox-${AWS::Region}
+        - ${SystemName}-${EnvType}-role-ec2-${AWS::Region}
         - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}
       Description: !Sub
-        - ${SystemName}-${EnvType}-role-sandbox-${AWS::Region}
+        - ${SystemName}-${EnvType}-role-ec2-${AWS::Region}
         - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}
       Path: /
       AssumeRolePolicyDocument:
@@ -43,7 +43,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub
-            - ${SystemName}-${EnvType}-role-sandbox-${AWS::Region}
+            - ${SystemName}-${EnvType}-role-ec2-${AWS::Region}
             - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}
         - Key: SystemName
           Value: !Ref SystemName
@@ -54,7 +54,7 @@ Resources:
     Type: AWS::IAM::InstanceProfile
     Properties:
       InstanceProfileName: !Sub
-        - ${SystemName}-${EnvType}-profile-sandbox-${AWS::Region}
+        - ${SystemName}-${EnvType}-profile-ec2-${AWS::Region}
         - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}
       Path: /
       Roles:
@@ -65,5 +65,5 @@ Outputs:
     Value: !Ref InstanceProfileSandBox
     Export:
       Name: !Sub
-        - ${SystemName}-${EnvType}-profile-sandbox-${AWS::Region}
+        - ${SystemName}-${EnvType}-profile-ec2-${AWS::Region}
         - {SystemName: !Ref SystemName, EnvType: !Ref EnvType}

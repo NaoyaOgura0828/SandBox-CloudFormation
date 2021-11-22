@@ -41,7 +41,8 @@ arn:aws:iam::aws:policy/AdministratorAccess
 $ aws configure
 ```
 
-**上記を実行すると`AWS Access Key ID`等の入力を求められるが、次のステップでファイルを編集するので、ここでは適当な入六をしても良い。**
+**上記を実行すると`AWS Access Key ID`等の入力を求められるが、次のステップでファイルを編集するので、
+ここでは厳密に設定しなくても良い。**
 
 <br>
 

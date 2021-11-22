@@ -1,6 +1,6 @@
 # SandBox-CloudFormation
 
-`SandBox-CloudFormation`は`AWS CloudFormation`を利用したInfrastructure as Codeで開発環境を作成する。
+`SandBox-CloudFormation`は`AWS CloudFormation`を利用したInfrastructure as Codeで開発環境を構築する。
 
 
 # Requirement
@@ -19,12 +19,13 @@
 # Installation
 
 1. AWSへアクセスし、CloudFormation実行用IAMユーザーを作成する。
-    <br>
-    ユーザーポリシーは下記を推奨する。
-    ```
-    # ユーザーポリシー
-    arn:aws:iam::aws:policy/AdministratorAccess
-    ```
+<br>
+ユーザーポリシーは下記を推奨する。
+
+```
+# ユーザーポリシー
+arn:aws:iam::aws:policy/AdministratorAccess
+```
 
 <br>
 
@@ -35,34 +36,38 @@
 <br>
 
 3. `.aws`を作成する。
-    ```Bash
-    $ aws configure
-    ```
-    **上記を実行すると`AWS Access Key ID`等の入力を求められるが、次のステップでファイルを編集するので何も入力せずに進む。**
+
+```Bash
+$ aws configure
+```
+
+**上記を実行すると`AWS Access Key ID`等の入力を求められるが、次のステップでファイルを編集するので、ここでは適当な入六をしても良い。**
 
 <br>
 
 4. `.csv`内に記載されている`Access key ID`及び`Secret access key`を`\.aws\credentials`内に転記する。
-    ```
-    [default]
-    aws_access_key_id = {Access key ID}
-    aws_secret_access_key = {Secret access key}
-    region = {任意のリージョン}
 
-    # 任意に構築先を追加作成可能
-    # 構築先AWSアカウント毎に設定を行う
-    [{プロジェクト名}-{環境名}]
-    aws_access_key_id = {Access key ID}
-    aws_secret_access_key = {Secret access key}
-    region = ap-northeast-1
-    ```
+```
+[default]
+aws_access_key_id = {Access key ID}
+aws_secret_access_key = {Secret access key}
+region = {任意のリージョン}
+
+# 任意に構築先を追加作成可能
+# 構築先AWSアカウント毎に設定を行う
+[{プロジェクト名}-{環境名}]
+aws_access_key_id = {Access key ID}
+aws_secret_access_key = {Secret access key}
+region = ap-northeast-1
+```
 
 <br>
 
 5. `Bash`で各`.sh`に権限を付与する。
-    ```Bash
-    $ chmod +x ${ファイル名}
-    ```
+
+```Bash
+$ chmod +x ${ファイル名}
+```
 
 <br>
 
@@ -70,72 +75,75 @@
 # Usage
 
 1. `\SandBox\network\{環境名}-parameters.json`内に展開先`VPCCidrBlock`, `PublicSubnetCidrBlock`を設定する。
-    <br>
-    <br>
-    ### 例:
-    ```json
-    {
-        "Parameters": [
-            {
-                "ParameterKey": "SystemName",
-                "ParameterValue": "SandBox"
-            },
-            {
-                "ParameterKey": "EnvType",
-                "ParameterValue": "dev"
-            },
-            {
-                "ParameterKey": "VPCCidrBlock",
-                "ParameterValue": "100.0.0.0/16"
-            },
-            {
-                "ParameterKey": "PublicSubnetCidrBlock",
-                "ParameterValue": "100.0.1.0/24"
-            }
-        ]
-    }
-    ```
+<br>
+<br>
+### 例:
+
+```json
+{
+    "Parameters": [
+        {
+            "ParameterKey": "SystemName",
+            "ParameterValue": "SandBox"
+        },
+        {
+            "ParameterKey": "EnvType",
+            "ParameterValue": "dev"
+        },
+        {
+            "ParameterKey": "VPCCidrBlock",
+            "ParameterValue": "100.0.0.0/16"
+        },
+        {
+            "ParameterKey": "PublicSubnetCidrBlock",
+            "ParameterValue": "100.0.1.0/24"
+        }
+    ]
+}
+```
 
 <br>
 
 2. `create_stacks.sh` (構築用)の設定を行う。
-    <br>
-    <br>
-    ### 例:
-    ```sh
-    # 構築対象リソースのコメントアウトを外す
-    # また構築対象リソースは複数選択可能である。
-    # 依存関係に注意する事 (例:sgを構築する為にはnetworkを先に構築しなければならない)
-    create_stack iam
-    # create_stack network
-    # create_stack sg
-    # create_stack sandbox
+<br>
+<br>
+### 例:
 
-    ```
-    <br>
-    <br>
+```sh
+# 構築対象リソースのコメントアウトを外す
+# また構築対象リソースは複数選択可能である。
+# 依存関係に注意する事 (例:sgを構築する為にはnetworkを先に構築しなければならない)
+create_stack iam
+# create_stack network
+# create_stack sg
+# create_stack sandbox
 
-    `create_change_sets.sh` (更新用)
-    <br>
-    `delete_stacks.sh` (削除用)
-    <br>
-    <br>
-    #### 上記についても`create_stacks.sh`と同様に設定を行う。
-    #### **`create_stacks.sh`同様、依存関係に注意して操作する事。**
+```
+
+<br>
+
+`create_change_sets.sh` (更新用)
+<br>
+`delete_stacks.sh` (削除用)
+<br>
+
+#### 上記についても`create_stacks.sh`と同様に設定を行う。
+#### **`create_stacks.sh`同様、依存関係に注意して操作する事。**
 
 <br>
 
 3. `Bash`で下記コマンドを実行する。
-    ```Bash
-    # 構築
-    $ ./create_stacks.sh ${環境名}
 
-    # 更新
-    $ ./create_change_sets.sh ${環境名}
+```Bash
+# 構築
+$ ./create_stacks.sh ${環境名}
 
-    # 削除
-    $ ./delete_stacks.sh ${環境名}
-    ```
+# 更新
+$ ./create_change_sets.sh ${環境名}
+
+# 削除
+$ ./delete_stacks.sh ${環境名}
+```
 
 <br>
 

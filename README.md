@@ -76,7 +76,7 @@ $ chmod +x ${ファイル名}
 
 1. `\SandBox\network\{環境名}-parameters.json`内に展開先`VPCCidrBlock`, `PublicSubnetCidrBlock`を設定する。
 <br>
-<br>
+
 ### 例:
 
 ```json
@@ -106,7 +106,7 @@ $ chmod +x ${ファイル名}
 
 2. `create_stacks.sh` (構築用)の設定を行う。
 <br>
-<br>
+
 ### 例:
 
 ```sh
@@ -128,6 +128,7 @@ create_stack iam
 <br>
 
 #### 上記についても`create_stacks.sh`と同様に設定を行う。
+
 #### **`create_stacks.sh`同様、依存関係に注意して操作する事。**
 
 <br>
